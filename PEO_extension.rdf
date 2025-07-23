@@ -226,21 +226,9 @@
     <owl:ObjectProperty rdf:about="https://w3id.org/peo#hasCharacteristic">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <owl:inverseOf rdf:resource="https://w3id.org/peo#isCharacteristicOf"/>
-        <rdfs:domain rdf:resource="https://w3id.org/peo#Classification"/>
+        <rdfs:domain rdf:resource="https://w3id.org/peo#View"/>
         <rdfs:range rdf:resource="https://w3id.org/peo#Characteristic"/>
         <rdfs:comment>A classification groups one or more characteristics together.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://w3id.org/peo#hasClassification -->
-
-    <owl:ObjectProperty rdf:about="https://w3id.org/peo#hasClassification">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="https://w3id.org/peo#isClassificationOf"/>
-        <rdfs:domain rdf:resource="https://w3id.org/peo#Task"/>
-        <rdfs:range rdf:resource="https://w3id.org/peo#Classification"/>
-        <rdfs:comment>A  task is described by one or more classifications based on the nature of the task.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -328,6 +316,17 @@
     
 
 
+    <!-- https://w3id.org/peo#hasView -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/peo#hasView">
+        <owl:inverseOf rdf:resource="https://w3id.org/peo#isViewOf"/>
+        <rdfs:domain rdf:resource="https://w3id.org/peo#View"/>
+        <rdfs:range rdf:resource="https://w3id.org/peo#Task"/>
+        <rdfs:comment>A  task is described by one or more view based on the nature of the task.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/peo#isCapability -->
 
     <owl:ObjectProperty rdf:about="https://w3id.org/peo#isCapability">
@@ -345,17 +344,7 @@
     <owl:ObjectProperty rdf:about="https://w3id.org/peo#isCharacteristicOf">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="https://w3id.org/peo#Characteristic"/>
-        <rdfs:range rdf:resource="https://w3id.org/peo#Classification"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://w3id.org/peo#isClassificationOf -->
-
-    <owl:ObjectProperty rdf:about="https://w3id.org/peo#isClassificationOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="https://w3id.org/peo#Classification"/>
-        <rdfs:range rdf:resource="https://w3id.org/peo#Task"/>
+        <rdfs:range rdf:resource="https://w3id.org/peo#View"/>
     </owl:ObjectProperty>
     
 
@@ -389,7 +378,7 @@
 
     <owl:ObjectProperty rdf:about="https://w3id.org/peo#isRegionOf">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:range rdf:resource="https://w3id.org/peo#Classification"/>
+        <rdfs:range rdf:resource="https://w3id.org/peo#View"/>
         <rdfs:comment>Relation between  a region and  a concept, where a region is a domain  of belonging of a  concept.</rdfs:comment>
         <rdfs:label>isRegionOf</rdfs:label>
     </owl:ObjectProperty>
@@ -447,6 +436,12 @@
         <rdfs:comment>Inverse relation of has_variant</rdfs:comment>
         <rdfs:label>isVariant</rdfs:label>
     </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/peo#isViewOf -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/peo#isViewOf"/>
     
 
 
@@ -1071,7 +1066,7 @@
     <!-- https://w3id.org/peo#Characteristic -->
 
     <owl:Class rdf:about="https://w3id.org/peo#Characteristic">
-        <owl:disjointWith rdf:resource="https://w3id.org/peo#Classification"/>
+        <owl:disjointWith rdf:resource="https://w3id.org/peo#View"/>
         <rdfs:comment>Represents specific, abstract or concrete information that describes a relevant aspect of a task.</rdfs:comment>
         <rdfs:label>Characteristic</rdfs:label>
     </owl:Class>
@@ -1118,28 +1113,13 @@
     
 
 
-    <!-- https://w3id.org/peo#Classification -->
+    <!-- https://w3id.org/peo#Classification_view -->
 
-    <owl:Class rdf:about="https://w3id.org/peo#Classification">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://w3id.org/peo#hasCharacteristic"/>
-                <owl:someValuesFrom rdf:resource="https://w3id.org/peo#Output_format"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="https://w3id.org/peo#Task"/>
-        <rdfs:comment>Grouping of characteristics into a classification based on the nature of the task.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- https://w3id.org/peo#Classification_characteristics -->
-
-    <owl:Class rdf:about="https://w3id.org/peo#Classification_characteristics">
+    <owl:Class rdf:about="https://w3id.org/peo#Classification_view">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://w3id.org/peo#Classification"/>
+                    <rdf:Description rdf:about="https://w3id.org/peo#View"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#hasCharacteristic"/>
                         <owl:allValuesFrom>
@@ -1154,8 +1134,8 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://w3id.org/peo#Classification"/>
-        <owl:disjointWith rdf:resource="https://w3id.org/peo#Text_characteristics"/>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/peo#View"/>
+        <owl:disjointWith rdf:resource="https://w3id.org/peo#Text_view"/>
         <rdfs:comment>Grouping of all characteristics related to classification tasks.</rdfs:comment>
     </owl:Class>
     
@@ -1388,19 +1368,6 @@
 
     <owl:Class rdf:about="https://w3id.org/peo#EmotionClassification">
         <rdfs:subClassOf rdf:resource="https://w3id.org/peo#TextTask"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://w3id.org/peo#hasClassification"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="https://w3id.org/peo#Classification_characteristics"/>
-                            <rdf:Description rdf:about="https://w3id.org/peo#Text_characteristics"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>Classification of text content.</rdfs:comment>
         <rdfs:label>Text classification</rdfs:label>
     </owl:Class>
@@ -1520,7 +1487,7 @@
                     <rdf:Description rdf:about="https://w3id.org/peo#Characteristic"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#isCharacteristicOf"/>
-                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Text_characteristics"/>
+                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Text_view"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1779,7 +1746,7 @@
                     <rdf:Description rdf:about="https://w3id.org/peo#Characteristic"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#isCharacteristicOf"/>
-                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Classification_characteristics"/>
+                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Classification_view"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1800,7 +1767,7 @@
                     <rdf:Description rdf:about="https://w3id.org/peo#Characteristic"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#isCharacteristicOf"/>
-                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Classification_characteristics"/>
+                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Classification_view"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1821,7 +1788,7 @@
                     <rdf:Description rdf:about="https://w3id.org/peo#Characteristic"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#isCharacteristicOf"/>
-                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Text_characteristics"/>
+                        <owl:allValuesFrom rdf:resource="https://w3id.org/peo#Text_view"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -2536,6 +2503,7 @@
     <!-- https://w3id.org/peo#Task -->
 
     <owl:Class rdf:about="https://w3id.org/peo#Task">
+        <owl:disjointWith rdf:resource="https://w3id.org/peo#View"/>
         <rdfs:comment>Task that has to be exxecuted by a large language model.</rdfs:comment>
         <rdfs:label>Task</rdfs:label>
     </owl:Class>
@@ -2586,12 +2554,6 @@
 
     <owl:Class rdf:about="https://w3id.org/peo#TextTask">
         <rdfs:subClassOf rdf:resource="https://w3id.org/peo#Task"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://w3id.org/peo#hasClassification"/>
-                <owl:someValuesFrom rdf:resource="https://w3id.org/peo#Text_characteristics"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>Task involving text.</rdfs:comment>
         <rdfs:label>Text task</rdfs:label>
     </owl:Class>
@@ -2608,13 +2570,13 @@
     
 
 
-    <!-- https://w3id.org/peo#Text_characteristics -->
+    <!-- https://w3id.org/peo#Text_view -->
 
-    <owl:Class rdf:about="https://w3id.org/peo#Text_characteristics">
+    <owl:Class rdf:about="https://w3id.org/peo#Text_view">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://w3id.org/peo#Classification"/>
+                    <rdf:Description rdf:about="https://w3id.org/peo#View"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://w3id.org/peo#hasCharacteristic"/>
                         <owl:allValuesFrom>
@@ -2629,7 +2591,7 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://w3id.org/peo#Classification"/>
+        <rdfs:subClassOf rdf:resource="https://w3id.org/peo#View"/>
         <rdfs:comment>Grouping of all characteristics related to classification tasks.</rdfs:comment>
     </owl:Class>
     
@@ -2762,6 +2724,20 @@
         <rdfs:subClassOf rdf:resource="https://w3id.org/peo#Task"/>
         <rdfs:comment>Task involving video processing.</rdfs:comment>
         <rdfs:label>Video task</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/peo#View -->
+
+    <owl:Class rdf:about="https://w3id.org/peo#View">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/peo#hasCharacteristic"/>
+                <owl:someValuesFrom rdf:resource="https://w3id.org/peo#Output_format"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Grouping of characteristics into a classification based on the nature of the task.</rdfs:comment>
     </owl:Class>
     
 
@@ -4226,9 +4202,9 @@
     <!-- https://w3id.org/peo#classficiation_char_2 -->
 
     <owl:NamedIndividual rdf:about="https://w3id.org/peo#classficiation_char_2">
-        <rdf:type rdf:resource="https://w3id.org/peo#Classification_characteristics"/>
-        <peo:hasCharacteristic rdf:resource="https://w3id.org/peo#binary"/>
-        <peo:hasCharacteristic rdf:resource="https://w3id.org/peo#toxicity"/>
+        <rdf:type rdf:resource="https://w3id.org/peo#Classification_view"/>
+        <peo:hasView rdf:resource="https://w3id.org/peo#binary"/>
+        <peo:hasView rdf:resource="https://w3id.org/peo#toxicity"/>
     </owl:NamedIndividual>
     
 
@@ -4449,8 +4425,6 @@
 
     <owl:NamedIndividual rdf:about="https://w3id.org/peo#emotion_classification_2">
         <rdf:type rdf:resource="https://w3id.org/peo#EmotionClassification"/>
-        <peo:hasClassification rdf:resource="https://w3id.org/peo#classficiation_char_2"/>
-        <peo:hasClassification rdf:resource="https://w3id.org/peo#text_char_2"/>
         <peo:hasDescription>Classification of the emotion text: &quot;You are a loser!&quot;</peo:hasDescription>
     </owl:NamedIndividual>
     
@@ -6441,9 +6415,9 @@
     <!-- https://w3id.org/peo#text_char_2 -->
 
     <owl:NamedIndividual rdf:about="https://w3id.org/peo#text_char_2">
-        <rdf:type rdf:resource="https://w3id.org/peo#Text_characteristics"/>
-        <peo:hasCharacteristic rdf:resource="https://w3id.org/peo#english"/>
-        <peo:hasCharacteristic rdf:resource="https://w3id.org/peo#sentences"/>
+        <rdf:type rdf:resource="https://w3id.org/peo#Text_view"/>
+        <peo:hasView rdf:resource="https://w3id.org/peo#english"/>
+        <peo:hasView rdf:resource="https://w3id.org/peo#sentences"/>
     </owl:NamedIndividual>
     
 
